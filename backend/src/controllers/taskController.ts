@@ -6,5 +6,5 @@ export const taskController = () => {
   const getTasks = (req: Request, res: Response, next: NextFunction) => {};
   const editTask = (req: Request, res: Response, next: NextFunction) => {};
   const deleteTask = (req: Request, res: Response, next: NextFunction) => {};
-  return { createTask, getTasks };
+  return { createTask, getTasks, editTask, deleteTask };
 };
