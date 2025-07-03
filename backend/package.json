@@ -1,12 +1,21 @@
 {
-  "name": "backend",
+  "name": "api-tasklist-forit25",
   "version": "1.0.0",
-  "description": "",
+  "description": "CRUD for tasklist application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "--watch index.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "Typescript",
+    "Node js",
+    "Express",
+    "PostgreSQL",
+    "CRUD",
+    "API",
+    "Tasklist"
+  ],
+  "author": "Sebastian Galeano",
   "license": "ISC"
 }
