@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "title": "create new endpoint",
+        "description": "create a new endpoint in your application",
+        "completed": false,
+        "createdAt": "2023-10-01T15:30:00Z"
+    },
+    {
+        "id": 2,
+        "title": "update task",
+        "description": "update a task in your application",
+        "completed": true,
+        "createdAt": "2023-10-02T10:45:00Z"
+    },
+    {
+        "id": 3,
+        "title": "delete task",
+        "description": "delete a task from your application",
+        "completed": false,
+        "createdAt": "2023-10-03T18:20:00Z"
+    }
+]
