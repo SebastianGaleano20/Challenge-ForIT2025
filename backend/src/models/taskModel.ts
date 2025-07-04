@@ -1,5 +1,5 @@
 import { readData, writeData } from "../utils/dbManagment";
-import type Task from "../types/index.js";
+import type { Task } from "../types/index.js";
 export const taskModel = () => {
   const getDataTasks = async () => {
     try {
@@ -14,6 +14,7 @@ export const taskModel = () => {
       const tasks = await readData();
       tasks.push(task);
       await writeData(tasks);
+      return true;
     } catch (error: any) {
       throw new Error(error.message);
     }

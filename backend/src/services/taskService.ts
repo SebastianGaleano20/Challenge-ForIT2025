@@ -1,5 +1,5 @@
 import { taskModel } from "../models/taskModel";
-import type Task from "../types/index.js";
+import type { Task } from "../types/index.js";
 
 export const taskService = () => {
   const { getDataById, getDataTasks, saveDataTask, deleteData } = taskModel();
@@ -25,7 +25,8 @@ export const taskService = () => {
       const task = await getDataById(taskId);
       if (!task) throw new Error("Task not found");
       Object.assign(task, dataTask);
-      return task;
+      await saveDataTask(task);
+      return true;
     } catch (error) {
       throw error;
     }
