@@ -1,20 +1,20 @@
-import fs from "node:fs";
-//Importamos fs para utilizar los modulos de node.
+import { readFile, writeFile } from "fs/promises";
+import Task from "../types";
 
-const readData = () => {
-  const jsonData = fs.readFileSync("./database/pizza.json");
-  const pizzas = JSON.parse(jsonData);
-  return pizzas;
+export const readData = async () => {
+  try {
+    const data = await readFile("./db/taskDb.json", "utf-8");
+    const tasks = JSON.parse(data);
+    return tasks;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
 };
-/*
--Utilizamos fs.readFileSync para leer la base de datos
--Utilizamos JSON.parse para obtener los datos en un objeto y poder utilizarlo.
--Retornamos la base de datos en formato objeto  */
 
-const writeData = (jsonData) => {
-  fs.writeFileSync("../database/pizza.json", jsonData);
+export const writeData = async (data: Task[]) => {
+  try {
+    await writeFile("./db/taskDb.json", JSON.stringify(data));
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
 };
-//fs.writeFileSync para sobreescribir la base de datos
-
-export { readData, writeData };
-//exportamos los modulos creados para leer y modificar la base de datos
