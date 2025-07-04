@@ -1,20 +1,18 @@
 import { readFile, writeFile } from "fs/promises";
+import { fileURLToPath } from "url";
+import { dirname, resolve } from "path";
 import { Task } from "../types/index.js";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const DB_PATH = resolve(__dirname, "../../src/db/taskDb.json");
+
 export const readData = async () => {
-  try {
-    const data = await readFile("./db/taskDb.json", "utf-8");
-    const tasks = JSON.parse(data);
-    return tasks;
-  } catch (error: any) {
-    throw new Error(error.message);
-  }
+  const data = await readFile(DB_PATH, "utf-8");
+  const tasks = JSON.parse(data);
+  return tasks as Task[];
 };
 
 export const writeData = async (data: Task[]) => {
-  try {
-    await writeFile("./db/taskDb.json", JSON.stringify(data));
-  } catch (error: any) {
-    throw new Error(error.message);
-  }
+  await writeFile(DB_PATH, JSON.stringify(data, null, 2));
 };
