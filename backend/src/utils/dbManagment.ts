@@ -1,5 +1,5 @@
 import { readFile, writeFile } from "fs/promises";
-import Task from "../types";
+import { Task } from "../types/index.js";
 
 export const readData = async () => {
   try {
