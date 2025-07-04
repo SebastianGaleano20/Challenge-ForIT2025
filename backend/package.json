@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "CRUD for tasklist application",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
