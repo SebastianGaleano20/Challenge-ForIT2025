@@ -1,4 +1,4 @@
-import { taskModel } from "../models/taskModel";
+import { taskModel } from "../models/taskModel.js";
 import type { Task } from "../types/index.js";
 
 export const taskService = () => {

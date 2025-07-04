@@ -1,4 +1,4 @@
-import { readData, writeData } from "../utils/dbManagment";
+import { readData, writeData } from "../utils/dbManagment.js";
 import type { Task } from "../types/index.js";
 export const taskModel = () => {
   const getDataTasks = async () => {
