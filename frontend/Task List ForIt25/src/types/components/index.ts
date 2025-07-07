@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 export interface FormData {
   title: string;
   description: string;
@@ -13,3 +15,9 @@ export interface Task {
 export interface CardProps {
   taskId: number;
 }
+
+export type ModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  children: ReactNode;
+};

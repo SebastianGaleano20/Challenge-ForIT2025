@@ -12,5 +12,12 @@
     "id": 2,
     "createdAt": "2025-07-07T16:31:24.522Z",
     "completed": false
+  },
+  {
+    "id": 3,
+    "createdAt": "2025-07-07T23:19:05.673Z",
+    "completed": false,
+    "title": "Testear Card tareas",
+    "description": "Probar si funcionan las card de cada tarea individual"
   }
 ]
