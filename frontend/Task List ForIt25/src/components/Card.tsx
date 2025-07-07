@@ -11,13 +11,14 @@ const TaskCard: React.FC<CardProps> = ({ taskId }) => {
       setLoading(true);
       try {
         const response = await fetch(
-          `https://localhost:2010/api/tasks/${taskId}`
+          `http://localhost:2010/api/tasks/${taskId}`
         );
         if (!response.ok) {
           throw new Error(`Error fetching task: ${response.status}`);
         }
-        const data: Task = await response.json();
-        setTask(data);
+        const result = await response.json();
+        const task = result.task;
+        setTask(task);
         setError(null);
       } catch (err: Error) {
         setError(err.message || "Error fetching task");

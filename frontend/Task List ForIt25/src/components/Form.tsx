@@ -25,7 +25,7 @@ export default function Form() {
     event.preventDefault();
 
     try {
-      const response = await fetch("https://localhost:2010/api/tasks/create", {
+      const response = await fetch("http://localhost:2010/api/tasks/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
