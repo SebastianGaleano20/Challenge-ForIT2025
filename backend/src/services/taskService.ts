@@ -1,5 +1,6 @@
 import { taskModel } from "../models/taskModel.js";
 import type { Task } from "../types/index.js";
+import { readData } from "../utils/dbManagment.js";
 
 export const taskService = () => {
   const { getDataById, getDataTasks, saveDataTask, deleteData } = taskModel();
@@ -12,10 +13,25 @@ export const taskService = () => {
       throw error;
     }
   };
-  const createTask = async (task: Task) => {
+  const createTask = async (
+    task: Omit<Task, "id" | "createdAt" | "completed">
+  ) => {
     try {
-      const newTask = await saveDataTask(task);
-      return newTask;
+      const existingTasks = await readData();
+      const newId =
+        existingTasks.length > 0
+          ? Math.max(...existingTasks.map((t: Task) => t.id)) + 1
+          : 1;
+
+      const newTask: Task = {
+        ...task,
+        id: newId,
+        createdAt: new Date().toISOString(),
+        completed: false,
+      };
+
+      const savedTask = await saveDataTask(newTask);
+      return savedTask;
     } catch (error) {
       throw error;
     }
