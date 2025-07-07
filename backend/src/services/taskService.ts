@@ -24,10 +24,10 @@ export const taskService = () => {
           : 1;
 
       const newTask: Task = {
-        ...task,
         id: newId,
         createdAt: new Date().toISOString(),
         completed: false,
+        ...task,
       };
 
       const savedTask = await saveDataTask(newTask);

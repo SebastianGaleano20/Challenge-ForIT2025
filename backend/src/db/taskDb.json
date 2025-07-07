@@ -1,9 +1,16 @@
 [
-    {
-        "id": 1,
-        "title": "Test",
-        "description": "test",
-        "completed": false,
-        "createdAt": "2023-10-01T15:30:00Z"
-    }
+  {
+    "id": 1,
+    "title": "Test",
+    "description": "test",
+    "completed": false,
+    "createdAt": "2023-10-01T15:30:00Z"
+  },
+  {
+    "title": "Test de nueva tarea",
+    "description": "Testeando aplicación",
+    "id": 2,
+    "createdAt": "2025-07-07T16:31:24.522Z",
+    "completed": false
+  }
 ]
