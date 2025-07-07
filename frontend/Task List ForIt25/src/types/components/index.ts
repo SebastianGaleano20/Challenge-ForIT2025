@@ -14,6 +14,8 @@ export interface Task {
 
 export interface CardProps {
   taskId: number;
+  onDelete: () => void;
+  onEdit: () => void;
 }
 
 export type ModalProps = {
