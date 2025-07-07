@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import type { Task } from "../types/components";
+import "../styles/listTasks.css";
+import Modal from "./Modal";
 
 export default function ListTasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -18,8 +22,13 @@ export default function ListTasks() {
         const tasks = result.tasks;
         setTasks(tasks);
         setError(null);
+        setModalMessage("✅ Tareas cargadas exitosamente.");
+        setModalOpen(true);
       } catch (err: Error) {
         setError(err.message || "Error fetching tasks");
+        setModalMessage("❌ Ocurrió un error al cargar las tareas.");
+        setModalOpen(true);
+        throw new Error(`Error: ${err}`);
       } finally {
         setLoading(false);
       }
@@ -44,6 +53,9 @@ export default function ListTasks() {
           <li key={task.id}>{task.title}</li>
         ))}
       </ul>
+      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+        <p>{modalMessage}</p>
+      </Modal>
     </section>
   );
 }
