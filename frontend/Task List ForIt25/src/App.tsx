@@ -1,9 +1,9 @@
-import Form from "./components/Form";
+import Card from "./components/Card";
 
 export default function App() {
   return (
-    <section className="container">
-      <Form />
+    <section>
+      <Card taskId={1} />
     </section>
   );
 }

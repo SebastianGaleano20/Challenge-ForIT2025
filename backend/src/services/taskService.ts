@@ -55,10 +55,19 @@ export const taskService = () => {
       throw error;
     }
   };
+  const getTaskById = async (taskId: number) => {
+    try {
+      const task = await getDataById(taskId);
+      return task;
+    } catch (error) {
+      throw error;
+    }
+  };
   return {
     getAllTasks,
     createTask,
     updateTask,
     deleteTask,
+    getTaskById,
   };
 };
