@@ -1,0 +1,33 @@
+.dashboard {
+  display: flex;
+  height: 100vh;
+}
+
+/* Botón hamburguesa */
+.hamburger {
+  position: fixed;
+  font-size: 2rem;
+  bottom: 1rem;
+  left: 1rem;
+  padding: 1rem;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  z-index: 1000;
+  cursor: pointer;
+}
+
+/* Ocultar hamburguesa en desktop */
+@media (min-width: 768px) {
+  .hamburger {
+    display: none;
+  }
+}
+
+.dashboard-content {
+  width: 80%;
+  padding: var(--spacing);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  overflow-y: auto;
+}

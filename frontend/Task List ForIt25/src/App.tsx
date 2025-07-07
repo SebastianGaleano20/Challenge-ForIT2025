@@ -1,9 +1,19 @@
-import ListTasks from "./components/ListTasks";
+import { Routes, Route } from "react-router-dom";
+import DashboardLayout from "./layout/Dashboard";
+import ListTask from "./components/ListTasks";
+import FormTask from "./components/FormTask";
+import CardTask from "./components/CardTask";
 
-export default function App() {
+function App() {
   return (
-    <section>
-      <ListTasks />
-    </section>
+    <Routes>
+      <Route path="/" element={<DashboardLayout />}>
+        <Route path="tareas" element={<ListTask />} />
+        <Route path="crear" element={<FormTask />} />
+        <Route path="tareas/:id" element={<CardTask taskId={0} />} />
+      </Route>
+    </Routes>
   );
 }
+
+export default App;
