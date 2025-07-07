@@ -1,9 +1,9 @@
-import Card from "./components/Card";
+import ListTasks from "./components/ListTasks";
 
 export default function App() {
   return (
     <section>
-      <Card taskId={2} />
+      <ListTasks />
     </section>
   );
 }

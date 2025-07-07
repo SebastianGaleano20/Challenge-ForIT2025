@@ -1,9 +1,9 @@
 import "../styles/form.css";
-import React, { useState } from "react";
+import { useState } from "react";
 import type { FormEvent } from "react";
 import type { FormData } from "../types/components";
 
-export default function Form() {
+export default function FormTask() {
   const [formData, setFormData] = useState<FormData>({
     title: "",
     description: "",
