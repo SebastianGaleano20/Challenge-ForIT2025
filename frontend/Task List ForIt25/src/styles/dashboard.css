@@ -1,18 +1,27 @@
 .dashboard {
   display: flex;
   height: 100vh;
+    overflow: hidden;
 }
-
+.dashboard-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  height: 100vh;
+  box-sizing: border-box;
+}
 /* Botón hamburguesa */
 .hamburger {
   position: fixed;
-  font-size: 2rem;
   bottom: 1rem;
   left: 1rem;
-  padding: 1rem;
-  background: none;
+  background-color: #ffffff71 ;
   border: none;
-  color: var(--text-color);
+  font-size: 1.75rem;
+  padding: 0.5rem;
+  color: var(--primary-color);
   z-index: 1000;
   cursor: pointer;
 }
