@@ -38,7 +38,6 @@
   color:var(--terciary-color);
 }
 
-/* Desktop: sidebar visible por defecto */
 @media (min-width: 768px) {
   .sidebar {
     display: block;

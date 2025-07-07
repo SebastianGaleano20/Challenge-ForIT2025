@@ -2,8 +2,11 @@ import "../styles/form.css";
 import { useState } from "react";
 import type { FormEvent } from "react";
 import type { FormData } from "../types/components";
+import Modal from "./Modal";
 
 export default function FormTask() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
   const [formData, setFormData] = useState<FormData>({
     title: "",
     description: "",
@@ -35,10 +38,12 @@ export default function FormTask() {
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
-      const data = await response.json();
-      console.log("Éxito:", data);
+      setModalMessage("✅ Tarea creada exitosamente.");
+      setModalOpen(true);
+      setFormData({ title: "", description: "" });
     } catch (error) {
-      console.error("Error al enviar el formulario:", error);
+      setModalMessage("❌ Ocurrió un error al crear la tarea.");
+      setModalOpen(true);
       throw new Error(`Error: ${error}`);
     }
   };
@@ -74,6 +79,9 @@ export default function FormTask() {
           Crear tarea
         </button>
       </form>
+      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+        <p>{modalMessage}</p>
+      </Modal>
     </section>
   );
 }
