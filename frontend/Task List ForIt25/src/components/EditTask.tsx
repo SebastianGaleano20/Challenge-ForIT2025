@@ -64,7 +64,7 @@ export default function EditTask() {
 
   return (
     <section className="form-container">
-      <h2>Editar tarea #{task.id}</h2>
+      <h2>Editar tarea: #{task.id}</h2>
       <form onSubmit={handleSubmit}>
         <label>Título:</label>
         <input

@@ -12,5 +12,19 @@
     "completed": false,
     "title": "Test de modal",
     "description": "testeando modal"
+  },
+  {
+    "id": 3,
+    "createdAt": "2025-07-07T23:19:05.673Z",
+    "completed": true,
+    "title": "Testear Card tareas",
+    "description": "Probar si funcionan las card de cada tarea individual"
+  },
+  {
+    "id": 3,
+    "createdAt": "2025-07-07T23:19:05.673Z",
+    "completed": true,
+    "title": "Testear Card tareas",
+    "description": "Probar si funcionan las card de cada tarea individual"
   }
 ]

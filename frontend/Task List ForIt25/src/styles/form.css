@@ -1,6 +1,7 @@
 .form-container {
     border: 1px solid #fafafa;
     margin: var(--spacing);
+    padding: 0.5rem;
     border-radius: var(--border-radius);
     font-size: 0.9rem;
     display: grid;

@@ -3,7 +3,13 @@ import type { Task } from "../types/index.js";
 import { readData } from "../utils/dbManagment.js";
 
 export const taskService = () => {
-  const { getDataById, getDataTasks, saveDataTask, deleteData } = taskModel();
+  const {
+    getDataById,
+    updateDataTask,
+    getDataTasks,
+    saveDataTask,
+    deleteData,
+  } = taskModel();
 
   const getAllTasks = async () => {
     try {
@@ -40,13 +46,15 @@ export const taskService = () => {
     try {
       const task = await getDataById(taskId);
       if (!task) throw new Error("Task not found");
-      Object.assign(task, dataTask);
-      await saveDataTask(task);
+
+      const updatedTask = { ...task, ...dataTask };
+      await updateDataTask(updatedTask);
       return true;
     } catch (error) {
       throw error;
     }
   };
+
   const deleteTask = async (taskId: number) => {
     try {
       await deleteData(taskId);

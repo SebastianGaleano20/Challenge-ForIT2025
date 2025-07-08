@@ -45,10 +45,24 @@ export const taskModel = () => {
       throw new Error(error.message);
     }
   };
+  const updateDataTask = async (updatedTask: Task) => {
+    try {
+      const tasks = await readData();
+      const index = tasks.findIndex((task: Task) => task.id === updatedTask.id);
+      if (index === -1) throw new Error("Task not found");
+
+      tasks[index] = updatedTask;
+      await writeData(tasks);
+      return true;
+    } catch (error: any) {
+      throw new Error(error.message);
+    }
+  };
   return {
     getDataTasks,
     saveDataTask,
     getDataById,
     deleteData,
+    updateDataTask,
   };
 };

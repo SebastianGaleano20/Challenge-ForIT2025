@@ -9,14 +9,12 @@
   transition: opacity 0.3s ease, filter 0.3s ease;
 }
 
-/* Tarea completada */
 .card.completed {
   opacity: 0.5;
   filter: grayscale(80%);
   text-decoration: line-through;
 }
 
-/* Header con botón de check */
 .card-header {
   display: flex;
   justify-content: space-between;
@@ -30,7 +28,6 @@
   cursor: pointer;
 }
 
-/* Menú inferior */
 .card-menu {
   display: flex;
   justify-content: flex-end;
@@ -41,6 +38,7 @@
 .card-menu button {
   background: transparent;
   border: 1px solid var(--text-color);
+  margin-top: 0.5rem;
   padding: 0.3rem 0.6rem;
   border-radius: 4px;
   cursor: pointer;
