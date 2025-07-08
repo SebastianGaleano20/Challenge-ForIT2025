@@ -3,8 +3,10 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 import type { FormData } from "../types/components";
 import Modal from "./Modal";
+import { useNavigate } from "react-router-dom";
 
 export default function FormTask() {
+  const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [formData, setFormData] = useState<FormData>({
@@ -41,6 +43,10 @@ export default function FormTask() {
       setModalMessage("✅ Tarea creada exitosamente.");
       setModalOpen(true);
       setFormData({ title: "", description: "" });
+      setTimeout(() => {
+        setModalOpen(false);
+        navigate("/tasks");
+      }, 2000);
     } catch (error) {
       setModalMessage("❌ Ocurrió un error al crear la tarea.");
       setModalOpen(true);

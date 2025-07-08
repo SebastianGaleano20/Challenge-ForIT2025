@@ -12,10 +12,10 @@ export default function Sidebar({ isOpen }: Props) {
       <nav>
         <ul>
           <li>
-            <Link to="/tareas">Lista de Tareas</Link>
+            <Link to="/tasks">Lista de Tareas</Link>
           </li>
           <li>
-            <Link to="/crear">Crear Tarea</Link>
+            <Link to="/create">Crear Tarea</Link>
           </li>
         </ul>
       </nav>

@@ -52,7 +52,7 @@ export default function EditTask() {
       setModalOpen(true);
       setTimeout(() => {
         setModalOpen(false);
-        navigate("/");
+        navigate("/tasks");
       }, 2000);
     } catch {
       setModalMessage("❌ Error al guardar");

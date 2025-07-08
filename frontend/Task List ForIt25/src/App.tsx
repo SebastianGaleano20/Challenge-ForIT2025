@@ -8,8 +8,8 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<DashboardLayout />}>
-        <Route path="tareas" element={<ListTask />} />
-        <Route path="crear" element={<FormTask />} />
+        <Route path="tasks" element={<ListTask />} />
+        <Route path="create" element={<FormTask />} />
         <Route path="/tasks/edit/:id" element={<EditTask />} />
       </Route>
     </Routes>
