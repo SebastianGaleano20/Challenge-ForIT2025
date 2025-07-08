@@ -10,7 +10,7 @@ function App() {
       <Route path="/" element={<DashboardLayout />}>
         <Route path="tasks" element={<ListTask />} />
         <Route path="create" element={<FormTask />} />
-        <Route path="/tasks/edit/:id" element={<EditTask />} />
+        <Route path="/edit/:id" element={<EditTask />} />
       </Route>
     </Routes>
   );
