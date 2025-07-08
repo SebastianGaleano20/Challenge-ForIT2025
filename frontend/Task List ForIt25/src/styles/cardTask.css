@@ -2,27 +2,50 @@
   background-color: var(--primary-color);
   padding: 1rem;
   border-radius: var(--border-radius);
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  color: var(--text-color);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  transition: opacity 0.3s ease, filter 0.3s ease;
 }
 
+/* Tarea completada */
+.card.completed {
+  opacity: 0.5;
+  filter: grayscale(80%);
+  text-decoration: line-through;
+}
+
+/* Header con botón de check */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header button {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+/* Menú inferior */
 .card-menu {
-  margin-top: 1rem;
   display: flex;
   justify-content: flex-end;
   gap: 0.5rem;
+  margin-top: auto;
 }
 
 .card-menu button {
-  background-color: transparent;
+  background: transparent;
   border: 1px solid var(--text-color);
-  color: var(--text-color);
-  padding: 0.25rem 0.5rem;
-  border-radius: var(--border-radius);
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  color: var(--text-color);
+  transition: all 0.2s ease;
 }
 
 .card-menu button:hover {

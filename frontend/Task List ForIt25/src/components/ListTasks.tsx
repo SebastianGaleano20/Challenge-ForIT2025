@@ -35,11 +35,10 @@ export default function ListTasks() {
     fetchTasks();
   }, []);
 
-  // Función para eliminar tarea
   const handleDelete = async (taskId: number) => {
     try {
       const response = await fetch(
-        `http://localhost:2010/api/tasks/${taskId}`,
+        `http://localhost:2010/api/tasks/delete/${taskId}`,
         {
           method: "DELETE",
         }
@@ -48,25 +47,24 @@ export default function ListTasks() {
         throw new Error(`Error eliminando tarea: ${response.status}`);
       setModalMessage("✅ Tarea eliminada exitosamente.");
       setModalOpen(true);
-      fetchTasks(); // refrescar lista
+      fetchTasks();
     } catch (err: Error) {
       setModalMessage(`❌ Error al eliminar tarea.${err.message}`);
       setModalOpen(true);
     }
   };
 
-  // Función para editar tarea: solo abrimos la CardTask con id, por ejemplo.
   const handleEdit = (taskId: number) => {
     console.log("Editar tarea:", taskId);
   };
 
-  if (loading) return <div>Cargando tareas...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <section>Cargando tareas...</section>;
+  if (error) return <section>Error: {error}</section>;
 
   return (
     <section className="list-tasks">
       <h1>Lista de tareas</h1>
-      <div className="cards-container">
+      <section className="cards-container">
         {tasks.map((task) => (
           <CardTask
             key={task.id}
@@ -75,7 +73,7 @@ export default function ListTasks() {
             onEdit={() => handleEdit(task.id)}
           />
         ))}
-      </div>
+      </section>
 
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
         <p>{modalMessage}</p>
