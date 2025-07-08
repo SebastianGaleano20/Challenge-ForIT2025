@@ -14,7 +14,7 @@ export interface Task {
 
 export interface CardProps {
   taskId: number;
-  onDelete: () => void;
+  onDelete: (n: number) => void;
   onEdit: () => void;
 }
 

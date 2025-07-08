@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
+import type { CardProps, Task } from "../types/components";
 import { useNavigate } from "react-router-dom";
 import Modal from "./Modal";
-import type { CardProps, Task } from "../types/components";
 import "../styles/cardTask.css";
 
 const TaskCard: React.FC<CardProps> = ({ taskId, onDelete }) => {
@@ -13,35 +13,27 @@ const TaskCard: React.FC<CardProps> = ({ taskId, onDelete }) => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchTask = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(
-          `http://localhost:2010/api/tasks/${taskId}`
-        );
-        if (!response.ok)
-          throw new Error(`Error fetching task: ${response.status}`);
-        const result = await response.json();
-        setTask(result.task);
-        setError(null);
-        setLoading(false);
-        setModalOpen(false);
-      } catch (err: any) {
-        setError(err.message || "Error fetching task");
-        setModalMessage(`❌ Error al eliminar tarea.${err.message}`);
-        setModalOpen(true);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchTask = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`http://localhost:2010/api/tasks/${taskId}`);
+      if (!response.ok)
+        throw new Error(`Error fetching task: ${response.status}`);
+      const result = await response.json();
+      setTask(result.task);
+      setError(null);
+    } catch (err: any) {
+      setError(err.message || "Error fetching task");
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchTask();
   }, [taskId]);
 
-  const handleToggleCompleted = async () => {
-    if (!task) return;
-
+  const handleCompletedToggle = async () => {
     try {
       const response = await fetch(
         `http://localhost:2010/api/tasks/edit/${taskId}`,
@@ -50,49 +42,53 @@ const TaskCard: React.FC<CardProps> = ({ taskId, onDelete }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ completed: !task.completed }),
+          body: JSON.stringify({ completed: !task?.completed }),
         }
       );
-      if (!response.ok) throw new Error();
 
-      const updated = await response.json();
-      setTask(updated.task);
+      if (!response.ok)
+        throw new Error(`Error al actualizar tarea: ${response.status}`);
+
+      await fetchTask();
+
       setModalMessage("✅ Tarea realizada");
       setModalOpen(true);
-    } catch (err: any) {
-      setModalMessage(`❌ Error al completar tarea.${err.message}`);
+    } catch (error) {
+      console.error("Error al cambiar el estado:", error);
+      setModalMessage("❌ Error al actualizar tarea.");
       setModalOpen(true);
     }
   };
 
-  const handleEdit = () => {
-    navigate(`/tasks/edit/${taskId}`);
-  };
-
-  if (loading) return <section className="card loading">Cargando...</section>;
-  if (error) return <section className="card error">Error: {error}</section>;
-  if (!task) return null;
+  if (loading) return <section>Cargando tarea...</section>;
+  if (error) return <section>Error: {error}</section>;
+  if (!task) return <section>No se encontró la tarea.</section>;
 
   return (
-    <section className={`card ${task.completed ? "completed" : ""}`}>
-      <section className="card-header">
-        <h3>{task.title}</h3>
-        <button onClick={handleToggleCompleted} title="Marcar como completada">
-          {task.completed ? "✅" : "☑️"}
-        </button>
+    <>
+      <section className={`card ${task.completed ? "completed" : ""}`}>
+        <section className="card-header">
+          <h3>{task.title}</h3>
+          <input
+            type="checkbox"
+            checked={task.completed}
+            onChange={handleCompletedToggle}
+          />
+        </section>
+        <p>ID: {task.id}</p>
+        <p>Descripción: {task.description}</p>
+        <section className="card-menu">
+          <button onClick={() => navigate(`/edit/${task.id}`)}>
+            ✏️ Editar
+          </button>
+          <button onClick={() => onDelete(task.id)}>🗑️ Eliminar</button>
+        </section>
       </section>
 
-      <p>ID: {task.id}</p>
-      <p>{task.description}</p>
-
-      <section className="card-menu">
-        <button onClick={handleEdit}>✏️ Editar</button>
-        <button onClick={onDelete}>🗑️ Eliminar</button>
-      </section>
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
         <p>{modalMessage}</p>
       </Modal>
-    </section>
+    </>
   );
 };
 
