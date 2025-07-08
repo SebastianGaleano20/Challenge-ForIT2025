@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Modal from "./Modal";
 import type { Task } from "../types/components";
+import { validateTask } from "../utils/validateTask";
 
 export default function EditTask() {
   const { id } = useParams();
@@ -38,8 +39,14 @@ export default function EditTask() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!task) return;
 
+    if (!task) return;
+    const errorMessage = validateTask(task.title, task.description);
+    if (errorMessage) {
+      setModalMessage(`❌ ${errorMessage}`);
+      setModalOpen(true);
+      return;
+    }
     try {
       const res = await fetch(`http://localhost:2010/api/tasks/edit/${id}`, {
         method: "PUT",

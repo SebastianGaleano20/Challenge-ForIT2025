@@ -4,6 +4,7 @@ import type { FormEvent } from "react";
 import type { FormData } from "../types/components";
 import Modal from "./Modal";
 import { useNavigate } from "react-router-dom";
+import { validateTask } from "../utils/validateTask";
 
 export default function FormTask() {
   const navigate = useNavigate();
@@ -29,6 +30,13 @@ export default function FormTask() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    const errorMessage = validateTask(formData.title, formData.description);
+    if (errorMessage) {
+      setModalMessage(`❌ ${errorMessage}`);
+      setModalOpen(true);
+      return;
+    }
+
     try {
       const response = await fetch("http://localhost:2010/api/tasks/create", {
         method: "POST",
@@ -40,6 +48,7 @@ export default function FormTask() {
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
+
       setModalMessage("✅ Tarea creada exitosamente.");
       setModalOpen(true);
       setFormData({ title: "", description: "" });
